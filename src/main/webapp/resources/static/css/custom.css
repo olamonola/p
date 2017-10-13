@@ -1,0 +1,413 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 2016-09-16, 21:00:26
+    Author     : Ola
+*/
+
+body {  
+    padding-top: 70px;
+   /*background:
+        linear-gradient(135deg, #ffffff 22px, #dbdcff 22px, #dbdcff 24px, transparent 24px, transparent 67px, #b5ffdb 67px, #dbdcff 69px, transparent 69px),
+        linear-gradient(225deg, #ffffff 22px, #dbdcff 22px, #dbdcff 24px, transparent 24px, transparent 67px, #b5ffdb 67px, #dbdcff 69px, transparent 69px)0 64px;
+    background-color:#ffffff;
+    background-size: 64px 128px
+   background-color:gray;*/
+   background: linear-gradient(155deg, #cfd5d6, #bedfe2, #8ad4db, #a5efdd, #cfd5d6);
+   background-attachment: fixed;
+
+}
+
+.archived{
+    background-color: #d1d1d1 !important;
+}
+
+.grey {
+    color:lightgray;
+}
+
+.red-color {
+    color:#d67853;
+}
+
+.green-color {
+    color:#6dc10b;
+}
+
+.blueRowHeader{
+    background:#dbdcff;/* For browsers that do not support gradients */  
+}
+
+.greenRowHeader{
+    background:#b5ffdb;/* For browsers that do not support gradients */
+}
+
+.cellGradientBlue{
+    background: #ffffff; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(90deg, #dbdcff, #ffffff); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(90deg, #dbdcff, #ffffff); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(90deg, #dbdcff, #ffffff); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(90deg, #dbdcff, #ffffff); /* Standard syntax */
+}
+
+.cellGradientGreen{
+    background: #ffffff; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(90deg, #b5ffdb, #ffffff); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(90deg, #b5ffdb, #ffffff); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(90deg, #b5ffdb, #ffffff); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(90deg, #b5ffdb, #ffffff); /* Standard syntax */
+}
+
+.cellGradientGreenReverse{
+    background: #ffffff; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(-90deg, #b5ffdb, #ffffff); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(-90deg, #b5ffdb, #ffffff); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(-90deg, #b5ffdb, #ffffff); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(-90deg, #b5ffdb, #ffffff); /* Standard syntax */
+}
+
+table.borderless td,table.borderless th{
+    border: none !important;
+}
+
+table{
+    background: #ffffff;
+}
+
+.panel-primary>.panel-heading {
+    color: #fff;
+    background-color: #e2e2e2;
+    opacity: 0.7;
+    filter: alpha(opacity=70); /* For IE8 and earlier */
+    border-color: #d3d3d3;
+}
+
+.panel-info>.panel-heading {
+    color: #fff;
+    background-color: #e2e2e2;
+    opacity: 0.7;
+    filter: alpha(opacity=70); /* For IE8 and earlier */
+    border-color: #d3d3d3;
+}
+
+.panel-one>.panel-heading {
+    color: #fff;
+    padding-bottom: 0px;
+    background-color: #d3d154;
+    opacity: 0.7;
+    filter: alpha(opacity=70); /* For IE8 and earlier */
+    border-color: #d3d3d3;
+}
+
+.panel-two>.panel-heading {
+    color: #fff;
+    padding-bottom: 0px;
+    background-color: #98d354;
+    opacity: 0.7;
+    filter: alpha(opacity=70); /* For IE8 and earlier */
+    border-color: #d3d3d3;
+}
+
+.panel-three>.panel-heading {
+    color: #fff;
+    padding-bottom: 0px;
+    background-color: #54d387;
+    opacity: 0.7;
+    filter: alpha(opacity=70); /* For IE8 and earlier */
+    border-color: #d3d3d3;
+}
+
+.panel-four>.panel-heading {
+    color: #fff;
+    padding-bottom: 0px;
+    background-color: #54d3c2;
+    opacity: 0.7;
+    filter: alpha(opacity=70); /* For IE8 and earlier */
+    border-color: #d3d3d3;
+}
+
+.panel-primary {
+    border-color: #d3d3d3;
+}
+
+.panel-title {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 16px;
+    color: black;
+}
+.navbar {
+    background-color: black;
+    border-color: #cfd5d6;
+    opacity: 0.7;
+    filter: alpha(opacity=70); /* For IE8 and earlier */
+}
+
+.navbar-fixed-top {
+    top: 0;
+    border-width: 0 0 6px;
+}
+
+.navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:focus, .navbar-inverse .navbar-nav>.open>a:hover {
+    color: #808080;
+    background-color: #00ffbf;
+}
+
+.btn-link {
+    font-weight: 400;
+    color: #4ea3aa;
+    border-radius: 0;
+}
+
+.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
+    z-index: 2;
+    color: #ffffff;
+    cursor: default;
+    background-color: #4ea3aa;
+    border-color: #50ceaf;
+}
+
+.btn-intern {
+    color: black;
+    background: linear-gradient(#fff9af, #ffff5b, #fff9af);
+    border-color: #fffa00;
+}
+
+.btn-exemption {
+    color: black;
+    background: linear-gradient(#d6ffaf, #b9f285, #d6ffaf);
+    border-color: #d6ffaf;
+}
+
+.btn-intern:hover {
+    box-shadow: 0 0 10px #fff, 0 0 10px #fff;
+}
+
+.btn-exemption:hover {
+    box-shadow: 0 0 10px #bbdd9b, 0 0 10px #bbdd9b;
+}
+
+.evaluated{
+    border: 1px solid #b7e087;
+    background-color: #eeffdb;
+}
+
+.not-evaluated{
+    border: 1px solid #ffcdbf;
+    background-color: #fff5f2;
+}
+
+.failed{
+    color: red;
+}
+
+.grade-select {
+    min-width: 58px;
+    width: 100%;
+    padding: 1px 1px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+ * Global add-ons
+ */
+
+.sub-header {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+/*
+ * Top navigation
+ * Hide default border to remove 1px line.
+ */
+.navbar-fixed-top {
+  border: 0;
+}
+
+/*
+ * Sidebar
+ */
+
+/* Hide for mobile, show later */
+.sidebar {
+  display: none;
+}
+@media (min-width: 768px) {
+  .sidebar {
+    position: fixed;
+    top: 51px;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    display: block;
+    padding: 20px;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+    /*background-color: #f5f5f5;*/
+    border-right: 1px solid #eee;
+  }
+}
+
+/* Sidebar navigation */
+.nav-sidebar {
+  margin-right: -21px; /* 20px padding + 1px border */
+  margin-bottom: 20px;
+  margin-left: -20px;
+}
+.nav-sidebar > li > a {
+  padding-right: 20px;
+  padding-left: 20px;
+}
+.nav-sidebar > .active > a,
+.nav-sidebar > .active > a:hover,
+.nav-sidebar > .active > a:focus {
+  color: #fff;
+  /*background-color: #428bca;/*/
+}
+
+
+/*
+ * Main content
+ */
+
+.main {
+  /*padding: 20px;*/
+}
+@media (min-width: 768px) {
+  .main {
+   /* padding-right: 40px;*/
+    padding-left: 130px;
+  }
+}
+
+
+/*
+ * Placeholder dashboard ideas
+ */
+
+.placeholders {
+  margin-bottom: 30px;
+  text-align: center;
+}
+.placeholders h4 {
+  margin-bottom: 0;
+}
+.placeholder {
+  margin-bottom: 20px;
+}
+.placeholder img {
+  display: inline-block;
+  border-radius: 50%;
+}
+
+
+
+
+
+
+
+
+
+
+
+.glyphicon { 
+    margin-right:10px; 
+}
+.panel-body-custom { 
+    padding:0px; 
+    margin-bottom: 0px;
+}
+.panel-body-custom table tbody tr td { 
+    padding-left: 15px;
+     
+}
+
+.panel-body-custom .table {
+    margin-bottom: 0px; 
+}
+.panel-cust {
+    margin-bottom: 0px;
+    border-bottom-width: 0px;
+}
+.table-cust{
+    margin-bottom: 0px;
+}
+.td-cust{
+    padding-bottom: 0px !important;
+}
+
+
+
+
+
+html {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  position: relative;
+  margin: 0;
+  padding-bottom: 10rem;
+  min-height: 100%;
+}
+
+.footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  text-align: center;
+}
+
+
+.modal-content  {
+    -webkit-border-radius: 10px !important;
+    -moz-border-radius: 10px !important;
+    border-radius: 10px !important; 
+}
+
+.modal-header {
+    background-color: #8ad4db;
+    padding: 25px;
+    -webkit-border-top-left-radius: 10px !important;
+    -moz-border-top-left-radius: 10px !important;
+    border-top-left-radius: 10px !important;
+    border-top-right-radius: 10px !important;
+}
+
+.modal-footer {
+    padding: 25px;
+    background: linear-gradient(#8ad4db, #a5efdd);
+    -webkit-border-bottom-left-radius: 10px !important;
+    -moz-border-bottom-left-radius: 10px !important;
+    border-bottom-left-radius: 10px !important;
+    border-bottom-right-radius: 10px !important;
+    text-align: center;
+}
+
+.modal-title {
+    color: white;
+}
+
+
