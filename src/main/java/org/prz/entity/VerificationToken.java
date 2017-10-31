@@ -43,7 +43,7 @@ public class VerificationToken implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "expiration_date")
-    @Temporal(TemporalType.TIME)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date expirationDate;
     @JoinColumn(name = "account_id", referencedColumnName = "account_id")
     @ManyToOne(fetch = FetchType.EAGER, optional = false)

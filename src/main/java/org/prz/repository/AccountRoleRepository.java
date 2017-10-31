@@ -5,6 +5,7 @@
  */
 package org.prz.repository;
 
+import java.util.List;
 import org.prz.entity.AccountRole;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -14,4 +15,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface AccountRoleRepository extends JpaRepository<AccountRole, Integer> {
 
+    public List<AccountRole> findByAccountId(Integer accountId);
+    public AccountRole findOneByAccountId_AccountIdAndRoleId_RoleId(Integer accountId, Integer roleId);
 }

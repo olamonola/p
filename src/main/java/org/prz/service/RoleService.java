@@ -5,6 +5,9 @@
  */
 package org.prz.service;
 
+import java.util.List;
+import java.util.Optional;
+import org.prz.entity.Role;
 
 /**
  *
@@ -12,5 +15,7 @@ package org.prz.service;
  */
 public interface RoleService {
 
+    Optional<Role> getRoleById(int id);
+    List<Role> getAll();
 
 }

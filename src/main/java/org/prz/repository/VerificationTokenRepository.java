@@ -7,6 +7,9 @@ package org.prz.repository;
 
 import org.prz.entity.VerificationToken;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -14,4 +17,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface VerificationTokenRepository extends JpaRepository<VerificationToken, Integer> {
 
+    VerificationToken findOneByToken(String token);
+    
+    @Modifying
+    @Transactional
+    @Query("delete from VerificationToken t where t.expirationDate<CURRENT_TIMESTAMP")
+    void deleteOldTokens();
+
+    
 }

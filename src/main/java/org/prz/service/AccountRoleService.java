@@ -5,11 +5,15 @@
  */
 package org.prz.service;
 
+import java.util.Collection;
+import org.prz.entity.AccountRole;
 
 /**
  *
  * @author Ola
  */
 public interface AccountRoleService {
+
+    Collection<AccountRole> getAllByAccountId(int accountId);
 
 }

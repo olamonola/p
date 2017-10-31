@@ -26,6 +26,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -54,9 +55,6 @@ public class Account implements Serializable {
     @Column(name = "password")
     private String password;
     @Size(max = 2147483647)
-    @Column(name = "password_salt")
-    private String passwordSalt;
-    @Size(max = 2147483647)
     @Column(name = "password_hash_algorithm")
     private String passwordHashAlgorithm;
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
@@ -76,8 +74,8 @@ public class Account implements Serializable {
     private Date registrationTime;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "accout_confirmed")
-    private boolean accoutConfirmed;
+    @Column(name = "account_confirmed")
+    private boolean accountConfirmed;
     @Basic(optional = false)
     @NotNull
     @Column(name = "verified")
@@ -89,6 +87,8 @@ public class Account implements Serializable {
     @JoinColumn(name = "status_id", referencedColumnName = "status_id")
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     private Status statusId;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "accountId")
+    private Collection<ForgottenPasswordToken> forgottenPasswordTokenCollection;
 
     public Account() {
     }
@@ -97,14 +97,14 @@ public class Account implements Serializable {
         this.accountId = accountId;
     }
 
-    public Account(Integer accountId, String login, String password, String email, boolean active, Date registrationTime, boolean accoutConfirmed) {
+    public Account(Integer accountId, String login, String password, String email, boolean active, Date registrationTime, boolean accountConfirmed) {
         this.accountId = accountId;
         this.login = login;
         this.password = password;
         this.email = email;
         this.active = active;
         this.registrationTime = registrationTime;
-        this.accoutConfirmed = accoutConfirmed;
+        this.accountConfirmed = accountConfirmed;
     }
 
     public Integer getAccountId() {
@@ -129,14 +129,6 @@ public class Account implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getPasswordSalt() {
-        return passwordSalt;
-    }
-
-    public void setPasswordSalt(String passwordSalt) {
-        this.passwordSalt = passwordSalt;
     }
 
     public String getPasswordHashAlgorithm() {
@@ -171,12 +163,12 @@ public class Account implements Serializable {
         this.registrationTime = registrationTime;
     }
 
-    public boolean getAccoutConfirmed() {
-        return accoutConfirmed;
+    public boolean getAccountConfirmed() {
+        return accountConfirmed;
     }
 
-    public void setAccoutConfirmed(boolean accoutConfirmed) {
-        this.accoutConfirmed = accoutConfirmed;
+    public void setAccountConfirmed(boolean accountConfirmed) {
+        this.accountConfirmed = accountConfirmed;
     }
 
     public Collection<AccountRole> getAccountRoleCollection() {
@@ -234,6 +226,14 @@ public class Account implements Serializable {
     @Override
     public String toString() {
         return "jpa.entities.Account[ accountId=" + accountId + " ]";
+    }
+
+    public Collection<ForgottenPasswordToken> getForgottenPasswordTokenCollection() {
+        return forgottenPasswordTokenCollection;
+    }
+
+    public void setForgottenPasswordTokenCollection(Collection<ForgottenPasswordToken> forgottenPasswordTokenCollection) {
+        this.forgottenPasswordTokenCollection = forgottenPasswordTokenCollection;
     }
 
 }
