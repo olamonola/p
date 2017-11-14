@@ -41,6 +41,8 @@ public class InternshipType implements Serializable {
     @Size(min = 1, max = 2147483647)
     @Column(name = "type")
     private String type;
+    @Column(name ="duration")
+    private String duration;
     @Column(name = "enabled")
     private boolean enabled;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "internshipTypeId")
@@ -101,6 +103,14 @@ public class InternshipType implements Serializable {
 
     public void setInternshipCollection(Collection<Internship> internshipCollection) {
         this.internshipCollection = internshipCollection;
+    }
+
+    public String getDuration() {
+        return duration;
+    }
+
+    public void setDuration(String duration) {
+        this.duration = duration;
     }
 
     @Override

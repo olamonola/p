@@ -5,6 +5,9 @@
  */
 package org.prz.service;
 
+import java.util.List;
+import org.springframework.data.domain.Page;
+import org.prz.entity.System;
 
 /**
  *
@@ -12,4 +15,15 @@ package org.prz.service;
  */
 public interface SystemService {
 
+    public Page<org.prz.entity.System> getSystems(Integer pageNumber, String name);
+
+    public org.prz.entity.System findOne(int id);
+
+    public org.prz.entity.System save(org.prz.entity.System system);
+
+    public void delete(int id);
+    
+    public List<org.prz.entity.System> findAll();
+    
+    public List<System> findBothEnabledAndDisabled();
 }

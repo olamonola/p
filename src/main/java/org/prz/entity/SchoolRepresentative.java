@@ -36,11 +36,11 @@ public class SchoolRepresentative implements Serializable {
         this.schoolRepresentativeId = schoolRepresentativeId;
     }
 
-    public Integer getPwszRepresentativeId() {
+    public Integer getSchoolRepresentativeId() {
         return schoolRepresentativeId;
     }
 
-    public void setPwszRepresentativeId(Integer schoolRepresentativeId) {
+    public void setSchoolRepresentativeId(Integer schoolRepresentativeId) {
         this.schoolRepresentativeId = schoolRepresentativeId;
     }
 
@@ -74,7 +74,7 @@ public class SchoolRepresentative implements Serializable {
 
     @Override
     public String toString() {
-        return "jpa.entities.PwszRepresentative[ schoolRepresentativeId=" + schoolRepresentativeId + " ]";
+        return "jpa.entities.SchoolRepresentative[ schoolRepresentativeId=" + schoolRepresentativeId + " ]";
     }
     
 }

@@ -5,8 +5,10 @@
  */
 package org.prz.service;
 
+import org.prz.entity.SchoolRepresentative;
 import org.prz.entity.SecretCode;
 import org.prz.entity.Server;
+import org.prz.repository.SchoolRepresentativeRepository;
 import org.prz.repository.SecretCodeRepository;
 import org.prz.repository.ServerRepository;
 import org.slf4j.Logger;
@@ -30,11 +32,15 @@ public class ManagementServiceImpl implements ManagementService {
     @Autowired
     private final ServerRepository serverRepository;
     
+    @Autowired
+    private final SchoolRepresentativeRepository schoolRepresentativeRepository;
 
     public ManagementServiceImpl(SecretCodeRepository secretCodeRepository,
-            ServerRepository serverRepository) {
+            ServerRepository serverRepository,
+            SchoolRepresentativeRepository schoolRepresentativeRepository) {
         this.secretCodeRepository = secretCodeRepository;
         this.serverRepository = serverRepository;
+        this.schoolRepresentativeRepository = schoolRepresentativeRepository;
     }
 
     @Transactional
@@ -66,6 +72,28 @@ public class ManagementServiceImpl implements ManagementService {
         newS.setName(s.getName());
         newS = serverRepository.save(newS);
         return newS;
+    }
+    
+    @Override
+    public SchoolRepresentative getSchoolRepresentative(){
+        return schoolRepresentativeRepository.getOne(1);
+    }
+    
+    @Transactional
+    @Override
+    public SchoolRepresentative changeSchoolRepresentative(SchoolRepresentative representative){
+        SchoolRepresentative newP = new SchoolRepresentative();
+        String name;
+        if(representative.getName() == null || representative.getName().isEmpty()){
+            name = "";
+        }
+        else{
+            name = representative.getName();
+        }
+        newP.setName(name);
+        newP.setSchoolRepresentativeId(1);
+        newP = schoolRepresentativeRepository.save(newP);
+        return newP;
     }
 
 }

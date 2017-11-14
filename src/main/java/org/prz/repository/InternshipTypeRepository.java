@@ -5,7 +5,10 @@
  */
 package org.prz.repository;
 
+import java.util.List;
 import org.prz.entity.InternshipType;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -13,5 +16,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author Ola
  */
 public interface InternshipTypeRepository extends JpaRepository<InternshipType, Integer>{
-
+    
+    public Page<InternshipType> findByTypeIgnoreCaseContainingOrderByTypeAsc(Pageable pageable, String type);
+    
+    public List<InternshipType> findByEnabledOrderByTypeAsc(Boolean enabled);
 }

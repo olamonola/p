@@ -5,6 +5,7 @@
  */
 package org.prz.service;
 
+import org.prz.entity.SchoolRepresentative;
 import org.prz.entity.SecretCode;
 import org.prz.entity.Server;
 
@@ -21,5 +22,9 @@ public interface ManagementService {
     public Server getServer();
     
     public Server changeServerName(Server s);
-      
+    
+    public SchoolRepresentative getSchoolRepresentative();
+    
+    public SchoolRepresentative changeSchoolRepresentative(SchoolRepresentative representative);
+    
 }

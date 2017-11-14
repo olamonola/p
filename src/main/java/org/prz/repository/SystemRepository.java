@@ -1,11 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.prz.repository;
 
+import java.util.List;
 import org.prz.entity.System;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -13,5 +11,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author Ola
  */
 public interface SystemRepository extends JpaRepository<System, Integer> {
+
+    public Page<System> findByNameIgnoreCaseContainingOrderByNameAsc(Pageable pageable, String name);
+    
+    public List<org.prz.entity.System> findByEnabledOrderByNameAsc(Boolean enabled);
 
 }
