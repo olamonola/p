@@ -60,6 +60,8 @@ public class Internship implements Serializable {
     @NotNull
     @Column(name = "exemption")
     private boolean exemption;
+    @Column(name = "dismissed")
+    private Boolean dismissed;
     @Size(max = 2147483647)
     @Column(name = "comments")
     private String comments;
@@ -371,6 +373,15 @@ public class Internship implements Serializable {
     public void setAccountId(UserProfile accountId) {
         this.accountId = accountId;
     }
+
+    public Boolean getDismissed() {
+        return dismissed;
+    }
+
+    public void setDismissed(Boolean dismissed) {
+        this.dismissed = dismissed;
+    }
+
 
     @Override
     public int hashCode() {

@@ -40,11 +40,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/Konto/zapomnianeHaslo",
                         "/Konto/zmianaZapomnianegoHasla/**").access("isAnonymous()")
                 .antMatchers("/System/**",
+                        "/Fakultet/**",
+                        "/Specjalizacja/**",
+                        "/TypPraktyk/**",
+                        "/Zarzadzanie/**",
                         "/Studenci/**",
                         "/Konto/zmianaMaila").
                 access("hasRole('ROLE_ADMIN') or hasRole('ROLE_OPIEKUN_PRAKTYK')")
-                .antMatchers().access("hasRole('ROLE_STUDENT')")
-                .antMatchers().
+                .antMatchers("/Firma/**").
                 access("hasRole('ROLE_ADMIN') or hasRole('ROLE_OPIEKUN_PRAKTYK') "
                         + "or hasRole('ROLE_STUDENT')")
                 .antMatchers("/Konto/edycjaProfilu").

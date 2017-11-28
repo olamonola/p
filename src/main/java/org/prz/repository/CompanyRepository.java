@@ -6,6 +6,8 @@
 package org.prz.repository;
 
 import org.prz.entity.Company;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -13,5 +15,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author Ola
  */
 public interface CompanyRepository extends JpaRepository<Company, Integer> {
-
+    public Page<Company> findByNameIgnoreCaseContainingOrderByNameAsc(Pageable pageable, String name);
 }

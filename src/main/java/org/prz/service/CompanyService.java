@@ -5,6 +5,8 @@
  */
 package org.prz.service;
 
+import org.prz.entity.Company;
+import org.springframework.data.domain.Page;
 
 /**
  *
@@ -12,4 +14,11 @@ package org.prz.service;
  */
 public interface CompanyService {
 
+    public Page<Company> getElements(Integer pageNumber, String name);
+
+    public Company findOne(int id);
+
+    public Company save(Company company);
+
+    public void delete(int id);
 }
