@@ -7,6 +7,7 @@ package org.prz.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.prz.dao.Porozumienie;
 import org.prz.dao.SearchInternship;
 import org.prz.dao.Sprawozdanie;
 import org.prz.dao.SprawozdanieSearch;
@@ -28,6 +29,8 @@ public interface InternshipService {
     public Page<Object[]> sprawozdanie(Integer pageNumber, SprawozdanieSearch s);
     
     public ArrayList<Wykaz> listaWykaz(List<Internship> praktyki, WykazSearch wykazSearch);
+
+    public Porozumienie setAgreement(Internship i);
 
     public Internship save(Internship internship);
 

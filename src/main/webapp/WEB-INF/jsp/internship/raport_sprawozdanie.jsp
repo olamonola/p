@@ -101,32 +101,8 @@
                     </div>
                 </div>
             </div>
-
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title"><span class="glyphicon glyphicon-file"></span>Generuj PDF lub pobierz plik CSV</h3>
-                </div>
-                <div class="panel-body">
-                    <t:cinput path="teacher" label="Opiekun praktyk*" placeholder="Imię Nazwisko"/><br>
-                    <div class="form-group">
-                        <label for="comments" class="control-label col-sm-2">Uwagi i wnioski</label>
-                        <div class="col-sm-10"> 
-                            <form:textarea path="comments" id="comments" class="form-control" rows="2" cols="50"></form:textarea>              
-                            </div>
-                            <BR>
-                            <div class="text-center">
-                            <form:button type="submit" class="btn btn-primary" name="generatePDF" value="generatePDF">
-                                <span class="glyphicon glyphicon-file"></span> Generuj PDF
-                            </form:button> 
-
-                            <form:button type="submit" class="btn btn-primary" name="export" value="export">
-                                <span class="glyphicon glyphicon-save-file"></span> Pobierz CSV
-                            </form:button> 
-                        </div>
-                    </form:form> 
-                </div>
-            </div>
-        </div>
+</form:form> 
+            
 
         <c:choose>
             <c:when test="${empty elements}">

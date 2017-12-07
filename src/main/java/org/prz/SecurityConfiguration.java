@@ -43,11 +43,28 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/Fakultet/**",
                         "/Specjalizacja/**",
                         "/TypPraktyk/**",
+                        "/Praktyka/listaPraktyk/**",
                         "/Zarzadzanie/**",
+                        "/Praktyka/wykaz/**",
+                        "/Praktyka/wykazPDF",
+                        "/Praktyka/sprawozdaniePDF",
+                        "/Praktyka/sprawozdanieCSV",
+                        "/Praktyka/ocen",
+                        "/Praktyka/potwierdz",
+                        "/Praktyka/odwolanie",
+                        "/Praktyka/archiwum",
+                        "/Praktyka/**/usunPraktyke",
+                        "/Praktyka/sprawozdanie/**",
+                        "/Praktyka/wykazCSV",
                         "/Studenci/**",
                         "/Konto/zmianaMaila").
                 access("hasRole('ROLE_ADMIN') or hasRole('ROLE_OPIEKUN_PRAKTYK')")
-                .antMatchers("/Firma/**").
+                .antMatchers("/Praktyka/mojePraktyki/**",
+                        "/Praktyka/**/usun",
+                        "Praktyka/wybrana_firma/**").access("hasRole('ROLE_STUDENT')")
+                .antMatchers("/Praktyka/widok/**",
+                        "/Praktyka/edycja/**",
+                        "/Firma/**").
                 access("hasRole('ROLE_ADMIN') or hasRole('ROLE_OPIEKUN_PRAKTYK') "
                         + "or hasRole('ROLE_STUDENT')")
                 .antMatchers("/Konto/edycjaProfilu").
@@ -71,7 +88,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/static/**", "/webjars/**"); 
+        web.ignoring().antMatchers("/static/**", "/webjars/**", "/jasperreports/**"); 
     }
 
 }

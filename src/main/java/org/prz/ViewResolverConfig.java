@@ -5,8 +5,6 @@
  */
 package org.prz;
 
-
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.ViewResolver;
@@ -14,6 +12,8 @@ import org.springframework.web.servlet.config.annotation.DefaultServletHandlerCo
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.springframework.web.servlet.view.jasperreports.JasperReportsMultiFormatView;
+import org.springframework.web.servlet.view.jasperreports.JasperReportsViewResolver;
 
 /**
  *
@@ -29,6 +29,19 @@ public class ViewResolverConfig extends WebMvcConfigurerAdapter
 
         configurer.enable();
     }
+
+      @Bean
+    public JasperReportsViewResolver getJasperReportsViewResolver() {
+
+        JasperReportsViewResolver resolver = new JasperReportsViewResolver();
+        resolver.setPrefix("classpath:jasperreports/");
+        resolver.setSuffix(".jrxml");
+        resolver.setReportDataKey("datasource");
+        resolver.setViewNames("*r_*");
+        resolver.setViewClass(JasperReportsMultiFormatView.class);
+        resolver.setOrder(0);
+        return resolver;
+    }
   
     @Bean
     public ViewResolver htmlViewResolver() {
@@ -39,6 +52,5 @@ public class ViewResolverConfig extends WebMvcConfigurerAdapter
         resolver.setOrder(1);
         return resolver;
     }
-  
-    
+
 }

@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import org.prz.dao.Porozumienie;
 import org.prz.dao.SearchInternship;
 import org.prz.dao.Sprawozdanie;
 import org.prz.dao.SprawozdanieSearch;
@@ -62,6 +63,15 @@ public class InternshipServiceImpl implements InternshipService {
     
     @Autowired
     private SchoolRepresentativeRepository schoolRepresentativeRepository;
+    
+    @Override
+    public Porozumienie setAgreement(Internship i) {
+        Porozumienie porozumienie = new Porozumienie(i);
+        if (schoolRepresentativeRepository.findOne(1) != null) {
+            porozumienie.setProrektor(schoolRepresentativeRepository.findOne(1).getName());
+        }
+        return porozumienie;
+    }
     
     @Transactional
     @Override

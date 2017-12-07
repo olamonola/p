@@ -129,12 +129,6 @@
                                     </c:choose>
                                 </td>
                                 <td>
-                                    <%--PDF --%>
-                                    <a class="btn btn-link" href="<c:url
-                                           value="/Praktyka/umowaPraktyk/${element.internshipId}"/>">
-                                        <span class="glyphicon glyphicon-file" aria-label="Umowa praktyk"></span>
-                                        Umowa (PDF)</a>
-                                    <br>
                                     <%--Szczegóły --%>
                                     <a class="btn btn-link" href="<c:url
                                            value="/Praktyka/widok/${element.internshipId}"/>">

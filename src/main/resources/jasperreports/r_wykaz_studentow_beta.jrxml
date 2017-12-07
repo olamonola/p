@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="r_wykaz_studentow_beta" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a02a0f81-9741-424d-93cd-959b9ded399c">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="541"/>
+	<property name="ireport.y" value="725"/>
+	<style name="Arial_Normal" isDefault="true" fontName="Times New Roman" pdfFontName="Times-Roman" pdfEncoding="Cp1250" isPdfEmbedded="false"/>
+	<style name="Times_Bold" fontName="Times New Roman" pdfFontName="Times-Bold" pdfEncoding="Cp1250" isPdfEmbedded="false"/>
+	<style name="Times_Italic" fontName="Times New Roman" pdfFontName="Times-Italic" pdfEncoding="Cp1250" isPdfEmbedded="false"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="datasource" uuid="b299167c-9fae-4345-83e3-ee4521d3e4d6">
+		<field name="lp" class="java.lang.String"/>
+		<field name="student" class="java.lang.String"/>
+		<field name="firma" class="java.lang.String"/>
+		<field name="opiekunFirmowy" class="java.lang.String"/>
+		<field name="termin" class="java.lang.String"/>
+	</subDataset>
+	<field name="specializations" class="java.lang.String"/>
+	<field name="kierunek" class="java.lang.String"/>
+	<field name="system" class="java.lang.String"/>
+	<field name="nazwaPraktyki" class="java.lang.String"/>
+	<field name="czasPraktyki" class="java.lang.String"/>
+	<field name="opiekunUczelniany" class="java.lang.String"/>
+	<variable name="logo" class="java.lang.String">
+		<variableExpression><![CDATA["iVBORw0KGgoAAAANSUhEUgAAAHQAAAArCAIAAAAmIDtSAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAALrSURBVGhD7ZhBbgMhDEV7kC57mq56lixylkg5SpSjNDfoIsqiGilSO4MNfINnoKhUVor1VSWMweXxYVCePp5fhjppwO2oAbejBtyOGnA7asDtqAG3owbcjhpwO8rD3Z2/OC6fryJD0evxzskQp32alul6uHByjPMtS4tqLWREP4W7nzhNj/vhLeuy6HbiBD3ej9e0S2MhU/oJXNVHWWTTfvt850cbMe2gS2Mhc6qHKxlJr0ljip2eeFZAhKdAqrGQQVXDjQn6qYfnaSQlPLjGYqEZobcVMqlauGCZNWvDKentBiDWTxuptkI2VQkXturqfHA7k0lreiVqK2RUlXDBLOs3ITAdzTn2wv0rz00Ofyy0FTKqv4eLvosx4LoYzq1WnzOXc6BFJQV3CQ+3rZBRVcKtMYtiOuilDavAbSxkU7Vwi7dL3OyBFAyruUyD21jIpGrhCr/MISwD+3QOAVE+SgbX4LYWsqgcbh68PdFT65GvjYS1EujB1kLmVAM3TqM07bVTMvGvEskGby1kSx6u+BEgiXQm2sxrfKQj3jg3WwtZkYc71EEDbkc9MFx6kW6fzqUcOi1bryXm4NI1Nt5w+U0L83ct6hUYtYxThvLP4DJNf70N77Tw3qOWjdfgb+rR4JKbeD7xguGtSi3Ba3iJ9hcJea10y7Ck3Q/7MJpfGzkadORyADfdUhUyCJcmTKQIyjHiptmyr3FTYy8SPuU1CKBlL/d5HlmsqG+cP87txJ0TamXxhRY3vpvStANw3OIy3edgJeqVfPUOdUA9GudBWgbgCIoJDPey/M3SirIIN9jTAVqmFEgBl5SmZC1oVsKlje8D4HI8BlxmcZ7mmRMRxn0WyDTnklWlbWeV4WKXzLnHm3sqf0UqyybcaCLhRBfRqgKZdlByWpK5AZcaqZaAe8XGOGxBRuGSK+cI7vO45fS0bUseDOEWowwX1286zdUTuP5fEmtWkFW4D6EBt6MG3I4acDtqwO2m55dvax4lYt7+KScAAAAASUVORK5CYII="]]></variableExpression>
+		<initialValueExpression><![CDATA["iVBORw0KGgoAAAANSUhEUgAAAHQAAAArCAIAAAAmIDtSAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAALrSURBVGhD7ZhBbgMhDEV7kC57mq56lixylkg5SpSjNDfoIsqiGilSO4MNfINnoKhUVor1VSWMweXxYVCePp5fhjppwO2oAbejBtyOGnA7asDtqAG3owbcjhpwO8rD3Z2/OC6fryJD0evxzskQp32alul6uHByjPMtS4tqLWREP4W7nzhNj/vhLeuy6HbiBD3ej9e0S2MhU/oJXNVHWWTTfvt850cbMe2gS2Mhc6qHKxlJr0ljip2eeFZAhKdAqrGQQVXDjQn6qYfnaSQlPLjGYqEZobcVMqlauGCZNWvDKentBiDWTxuptkI2VQkXturqfHA7k0lreiVqK2RUlXDBLOs3ITAdzTn2wv0rz00Ofyy0FTKqv4eLvosx4LoYzq1WnzOXc6BFJQV3CQ+3rZBRVcKtMYtiOuilDavAbSxkU7Vwi7dL3OyBFAyruUyD21jIpGrhCr/MISwD+3QOAVE+SgbX4LYWsqgcbh68PdFT65GvjYS1EujB1kLmVAM3TqM07bVTMvGvEskGby1kSx6u+BEgiXQm2sxrfKQj3jg3WwtZkYc71EEDbkc9MFx6kW6fzqUcOi1bryXm4NI1Nt5w+U0L83ct6hUYtYxThvLP4DJNf70N77Tw3qOWjdfgb+rR4JKbeD7xguGtSi3Ba3iJ9hcJea10y7Ck3Q/7MJpfGzkadORyADfdUhUyCJcmTKQIyjHiptmyr3FTYy8SPuU1CKBlL/d5HlmsqG+cP87txJ0TamXxhRY3vpvStANw3OIy3edgJeqVfPUOdUA9GudBWgbgCIoJDPey/M3SirIIN9jTAVqmFEgBl5SmZC1oVsKlje8D4HI8BlxmcZ7mmRMRxn0WyDTnklWlbWeV4WKXzLnHm3sqf0UqyybcaCLhRBfRqgKZdlByWpK5AZcaqZaAe8XGOGxBRuGSK+cI7vO45fS0bUseDOEWowwX1286zdUTuP5fEmtWkFW4D6EBt6MG3I4acDtqwO2m55dvax4lYt7+KScAAAAASUVORK5CYII="]]></initialValueExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="312" splitType="Stretch">
+			<textField>
+				<reportElement positionType="Float" x="216" y="248" width="528" height="20" uuid="bcffd872-36a3-443f-ace4-7e5c7f8c3261"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nazwaPraktyki}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Times_Italic" x="515" y="84" width="222" height="62" uuid="0079be9b-41e1-4185-b3e4-5bd8be157cc2"/>
+				<textElement textAlignment="Right">
+					<font isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Dokument nr 1]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="183" y="188" width="561" height="20" uuid="34481b42-d0ef-4f94-bc4b-7daeeecbea8f"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{kierunek}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="168" y="228" width="577" height="20" uuid="93a83fd3-0877-4f30-be2a-c6760665f4f5"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{system}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Times_Bold" positionType="Float" x="82" y="268" width="304" height="20" uuid="42b8ef9b-3b72-4ae6-a7e4-dbc13e029262"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Liczba godzin/ tygodni realizowanej praktyki: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Times_Bold" positionType="Float" x="82" y="288" width="197" height="20" uuid="36e0b517-be52-482b-89a5-2a1837faf820"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Opiekun praktyki studenckiej: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Times_Bold" x="82" y="188" width="100" height="20" uuid="f6972918-8f20-471d-955a-33d6b3098de0"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Kierunek studiów: ]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="194" y="208" width="550" height="20" uuid="0319c280-8edc-49ab-bc9b-92f6adaff5b4"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{specializations}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Times_Bold" x="82" y="208" width="112" height="20" uuid="5adbf73d-f844-43a8-b15c-1c77c2883161"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Specjalność studiów: ]]></text>
+			</staticText>
+			<image>
+				<reportElement x="78" y="40" width="163" height="44" uuid="47091ad0-221e-402f-932b-e6e022ffabe1"/>
+				<imageExpression><![CDATA[new java.io.StringBufferInputStream( new org.w3c.tools.codec.Base64Decoder($V{logo}).processString() )]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement positionType="Float" x="245" y="288" width="499" height="20" uuid="ce4d4589-c0b0-454d-a068-03b1f31fba0d"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{opiekunUczelniany}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="324" y="268" width="420" height="20" uuid="8a960dcf-8255-412b-9886-4bcd54e900e7"/>
+				<textElement verticalAlignment="Top">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{czasPraktyki}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Times_Bold" x="10" y="147" width="802" height="20" uuid="f1db98d1-7993-4708-92b6-efde19d8e232"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Wykaz studentów odbywających praktyki]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Times_Bold" positionType="Float" x="82" y="248" width="144" height="20" uuid="5da9b936-2e87-4c4a-b9a6-6190bc8500bf"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nazwa i rodzaj praktyki: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Times_Bold" positionType="Float" x="82" y="228" width="122" height="20" uuid="63e82c3d-ec01-4131-aacc-af7451a7f41b"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[System studiów: ]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="2" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="3" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="92" splitType="Stretch">
+			<componentElement>
+				<reportElement key="table" style="table" x="61" y="18" width="675" height="48" uuid="b6c0db88-d868-4320-ab08-5a484278fc75"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="datasource" uuid="79d633e1-b66c-4126-9139-aaa008ade1fd">
+						<dataSourceExpression><![CDATA[$P{REPORT_DATA_SOURCE}]]></dataSourceExpression>
+					</datasetRun>
+					<jr:column width="43" uuid="f80f2848-9d1b-47a9-9729-5c8e5e992a77">
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement style="Times_Bold" x="0" y="0" width="43" height="30" uuid="6a4077b8-786c-439b-ad05-ead545ca0b63"/>
+								<textElement textAlignment="Center">
+									<font size="11"/>
+								</textElement>
+								<text><![CDATA[Lp.]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="20" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement positionType="Float" x="0" y="0" width="43" height="20" uuid="f90c3364-0f2e-4e96-bef4-716510a15a77"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="12"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{lp}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="146" uuid="f489ab1a-724b-46ba-a554-554692356a1a">
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement style="Times_Bold" x="0" y="0" width="146" height="30" uuid="38521572-c3ef-4de3-9933-1524ebd43797"/>
+								<textElement textAlignment="Center">
+									<font size="11"/>
+								</textElement>
+								<text><![CDATA[Imię i nazwisko studenta]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="20" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement positionType="Float" x="0" y="0" width="146" height="20" uuid="f514489a-36a7-4dce-9c39-03894fa19349"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="12"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{student}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="207" uuid="bf3a1bb1-af43-4fa6-ab0e-ba15082d3626">
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement style="Times_Bold" x="0" y="0" width="207" height="30" uuid="3041446a-f165-410f-960a-f471200d4c8e"/>
+								<textElement textAlignment="Center">
+									<font size="11"/>
+								</textElement>
+								<text><![CDATA[Nazwa instytucji przyjmującej na praktyki, telefon kontaktowy]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="20" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement positionType="Float" x="0" y="0" width="207" height="20" uuid="c61f172a-7f2b-41b8-be23-1b56e3ac0a1b"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="12"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{firma}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="150" uuid="ab63a2de-9488-4fbc-be6c-032c3f9873be">
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement style="Times_Bold" x="0" y="0" width="150" height="30" uuid="3aed78eb-10c7-4b46-bc41-cd8c1e06225a"/>
+								<textElement textAlignment="Center">
+									<font size="11"/>
+								</textElement>
+								<text><![CDATA[Imię i nazwisko opiekuna praktyk wyznaczonego przez instytucję]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="20" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement positionType="Float" x="0" y="0" width="150" height="20" uuid="7d3d4309-7eb4-4f69-9ddf-90bc6ce3b25d"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="12"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{opiekunFirmowy}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="125" uuid="3207b909-d3f0-4be2-bce7-04a2644ec95f">
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement style="Times_Bold" x="0" y="0" width="125" height="30" uuid="e47070c6-4046-4d18-ab45-7cd84e392563"/>
+								<textElement textAlignment="Center">
+									<font size="11"/>
+								</textElement>
+								<text><![CDATA[Termin praktyki
+od - do
+]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="20" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement positionType="Float" x="0" y="0" width="125" height="20" uuid="78059f0d-1a6f-4277-b6c7-3363d4b22316"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="12"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{termin}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="2" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="2" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="91" splitType="Stretch">
+			<staticText>
+				<reportElement x="540" y="22" width="196" height="20" uuid="172f4d79-d3a5-433f-b966-99db0e8dddf1"/>
+				<textElement verticalAlignment="Bottom"/>
+				<text><![CDATA[_______________________________________]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Times_Italic" x="540" y="42" width="196" height="20" uuid="cd57b5a2-1f55-4661-a3a6-43df95b0b36c"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[(podpis opiekuna praktyk studenckich)]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

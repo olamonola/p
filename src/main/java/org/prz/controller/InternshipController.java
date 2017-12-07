@@ -5,21 +5,30 @@
  */
 package org.prz.controller;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import net.sf.jasperreports.engine.JRDataSource;
+import net.sf.jasperreports.engine.JREmptyDataSource;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.prz.CustomUser;
 import org.prz.dao.CurrentPage;
 import org.prz.dao.Grade;
 import org.prz.dao.InternshipArchived;
 import org.prz.dao.InternshipConfirmation;
+import org.prz.dao.Porozumienie;
 import org.prz.dao.SearchInternship;
+import org.prz.dao.Sprawozdanie;
 import org.prz.dao.SprawozdanieSearch;
 import org.prz.dao.StudentDismissed;
+import org.prz.dao.Wykaz;
 import org.prz.dao.WykazSearch;
 import org.prz.entity.Account;
 import org.prz.entity.Company;
@@ -62,8 +71,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
+import org.supercsv.io.CsvBeanWriter;
+import org.supercsv.io.ICsvBeanWriter;
+import org.supercsv.prefs.CsvPreference;
 
 /**
  *
@@ -365,6 +377,104 @@ public class InternshipController {
             redirectAttributes.addFlashAttribute("errormsg", "Błąd usuwania praktyki. Praktyka nie mogła zostać usunięta, ponieważ nie należy do ciebie, jest już potwierdzona lub oceniona.");
             return "redirect:../mojePraktyki/1";
         }
+    }
+
+    @GetMapping("/umowaPraktyk/{id}")
+    public ModelAndView umowaPraktyk(@PathVariable Integer id,
+            ModelMap modelMap,
+            ModelAndView modelAndView) {
+        List<Porozumienie> daneNaPorozumienie = new ArrayList<>();
+        Internship i = service.findOne(id);
+        if (i != null) {
+            //znajduje użytkownika który teraz jest zalogowany
+            CustomUser customUser = (CustomUser) SecurityContextHolder.getContext()
+                    .getAuthentication().getPrincipal();
+            Optional<Account> account = accountService.getAccountByLogin(customUser.getUsername());
+            UserProfile userProfile = account.get().getUserProfile();
+
+            Porozumienie porozumienie = service.setAgreement(i);
+            if (Objects.equals(userProfile.getAccountId(),
+                    service.findOne(id).getAccountId().getAccountId())) {
+                daneNaPorozumienie.add(porozumienie);
+                daneNaPorozumienie.add(porozumienie);
+                JRDataSource jRdataSource = new JRBeanCollectionDataSource(daneNaPorozumienie);
+                modelMap.put("datasource", jRdataSource);
+                modelMap.put("format", "pdf");
+                //modelAndView = new ModelAndView("r_test2", modelMap);
+                modelAndView = new ModelAndView("r_umowa", modelMap);
+                return modelAndView;
+            } else {
+                modelAndView = new ModelAndView("/error", modelMap);
+                modelAndView.addObject("msg", "Odmowa dostępu.");
+                return modelAndView;
+            }
+        } else {
+            modelAndView = new ModelAndView("/error", modelMap);
+            modelAndView.addObject("msg", "Praktyka, której dotyczy umowa, nie istnieje.");
+            return modelAndView;
+        }
+    }
+
+    @GetMapping("/sprawozdaniePDF")
+    public ModelAndView sprawozdaniePDF(ModelMap modelMap, ModelAndView modelAndView) {
+        logger.info("SPRAWOZDANIE Opiekuna Praktyk Studenckich z przebiegu realizacji praktyki");
+        SprawozdanieSearch spr = new SprawozdanieSearch();
+        if (modelMap.containsAttribute("sprawozdanieSearch")) {
+            spr = (SprawozdanieSearch) modelMap.get("sprawozdanieSearch");
+        }
+        ArrayList<Sprawozdanie> result = service.listaSprawozdaniePDF(spr);
+        JRDataSource jRdataSource = new JRBeanCollectionDataSource(result);
+        modelMap.put("datasource", jRdataSource);
+        modelMap.put("format", "pdf");
+        modelAndView = new ModelAndView("r_sprawozdanie", modelMap);
+        return modelAndView;
+    }
+
+    @GetMapping("/sprawozdanieCSV")
+    public void sprawozdanieCSV(HttpServletResponse response, ModelMap modelMap) throws IOException {
+
+        String csvFileName = "sprawozdanie.csv";
+        response.setContentType("text/csv;charset=utf-8");
+        String headerKey = "Content-Disposition";
+        String headerValue = String.format("attachment; filename=\"%s\"",
+                csvFileName);
+        response.setHeader(headerKey, headerValue);
+        SprawozdanieSearch spr = new SprawozdanieSearch();
+        if (modelMap.containsAttribute("sprawozdanieSearch")) {
+            spr = (SprawozdanieSearch) modelMap.get("sprawozdanieSearch");
+        }
+        ArrayList<Sprawozdanie> result = service.listaSprawozdaniePDF(spr);
+        try (ICsvBeanWriter csvWriter = new CsvBeanWriter(response.getWriter(),
+                CsvPreference.STANDARD_PREFERENCE)) {
+            String[] header = {"kierunek", "specjalnosc", "system", "rokStudiow",
+                "nazwaPraktyki", "dlugoscPraktyki", "opiekun", "studenciNaPraktykach",
+                "studenciZwolnieni", "studenciOdwolani", "uwagi", "lp", "instytucja",
+                "studenciWInstytucji"};
+            csvWriter.writeHeader(header);
+            for (Sprawozdanie aSprawozdanie : result) {
+                csvWriter.write(aSprawozdanie, header);
+            }
+        }
+    }
+
+    @GetMapping("/wykazPDF")
+    public ModelAndView wykazPDF(ModelMap modelMap, ModelAndView modelAndView) {
+        logger.info("Czy znajduje się tu atrybus sesji wykazSearch? {}", modelMap.containsAttribute("wykazSearch"));
+        WykazSearch w = new WykazSearch();
+        if (modelMap.containsAttribute("wykazSearch")) {
+            w = (WykazSearch) modelMap.get("wykazSearch");
+            logger.info("getInternshipType {}", w.getInternshipType());
+        }
+        List<Internship> result = service.wykazDaneDoPDF(w);
+        ArrayList<Wykaz> wykazy = service.listaWykaz(result, w);
+        JRDataSource jRdataSource = new JRBeanCollectionDataSource(wykazy);
+        modelMap.put("datasource", jRdataSource);
+        modelMap.put("format", "pdf");
+        WykazSearch nowy = (WykazSearch) modelMap.get("wykazSearch");
+        nowy.setSpecializations(null);
+        modelMap.addAttribute("wykazSearch", nowy);
+        modelAndView = new ModelAndView("r_wykaz_studentow_beta", modelMap);
+        return modelAndView;
     }
 
     /*Lista praktyk widziana przez opiekuna praktyk*/
@@ -876,6 +986,24 @@ public class InternshipController {
         return "internship/raport_sprawozdanie";
     }
 
+    @PostMapping(path = "/sprawozdanie/{pageNumber}", params = {"search", "!generatePDF", "!export"})
+    public String reportSprawozdanieSearch(@ModelAttribute("sprawozdanieSearch") final SprawozdanieSearch sprawozdanieSearch) {
+        logger.info("Pobieranie danych z formularza");
+        return "redirect:../sprawozdanie/1";
+    }
+
+    @PostMapping(path = "/sprawozdanie/{pageNumber}", params = {"!search", "generatePDF", "!export"})
+    public String reportSprawozdaniePDF(@ModelAttribute("sprawozdanieSearch") final SprawozdanieSearch sprawozdanieSearch) {
+        logger.info("Pobieranie danych z formularza");
+        return "redirect:../sprawozdaniePDF";
+    }
+
+    @PostMapping(path = "/sprawozdanie/{pageNumber}", params = {"!search", "!generatePDF", "export"})
+    public String reportSprawozdanieCSV(@ModelAttribute("sprawozdanieSearch") final SprawozdanieSearch sprawozdanieSearch) {
+        logger.info("Pobieranie danych z formularza");
+        return "redirect:../sprawozdanieCSV";
+    }
+
     @GetMapping("/wykaz/{pageNumber}")
     public String reportStudentsInCompanies(@PathVariable Integer pageNumber, ModelMap model) {
         WykazSearch searchValue;
@@ -913,6 +1041,58 @@ public class InternshipController {
         model.addAttribute("selectedSpecializations", selectedSpecializations);
         model.addAttribute("systems", systems);
         return "internship/raport_wykaz_studentow";
+    }
+
+    @PostMapping(path = "/wykaz/{pageNumber}", params = {"search", "!generatePDF", "!export"})
+    public String reportStudentsInCompaniesSearch(@ModelAttribute("wykazSearch") final WykazSearch wykazSearch) {
+        logger.info("Pobieranie danych z formularza");
+        return "redirect:../wykaz/1";
+    }
+
+    @PostMapping(path = "/wykaz/{pageNumber}", params = {"!search", "generatePDF", "!export"})
+    public String reportStudentsInCompaniesPDF(@ModelAttribute("wykazSearch") final WykazSearch wykazSearch) {
+        logger.info("Pobieranie danych z formularza");
+        return "redirect:../wykazPDF";
+    }
+
+    @PostMapping(path = "/wykaz/{pageNumber}", params = {"!search", "!generatePDF", "export"})
+    public String reportStudentsInCompaniesCSV(@ModelAttribute("wykazSearch") final WykazSearch wykazSearch) {
+        logger.info("Pobieranie danych z formularza");
+        return "redirect:../wykazCSV";
+    }
+
+    @GetMapping("/wykazCSV")
+    public void wykazCSV(HttpServletResponse response, ModelMap modelMap)
+            throws IOException {
+
+        String csvFileName = "wykaz.csv";
+        response.setContentType("text/csv;charset=utf-8");
+        String headerKey = "Content-Disposition";
+        String headerValue = String.format("attachment; filename=\"%s\"",
+                csvFileName);
+        response.setHeader(headerKey, headerValue);
+        WykazSearch wykazS = new WykazSearch();
+        if (modelMap.containsAttribute("wykazSearch")) {
+            logger.info("Model zawiera atrybut wykazSearch");
+            wykazS = (WykazSearch) modelMap.get("wykazSearch");
+        }
+        List<Internship> result = service.wykazDaneDoPDF(wykazS);
+        ArrayList<Wykaz> wykazy = service.listaWykaz(result, wykazS);
+        try (ICsvBeanWriter csvWriter = new CsvBeanWriter(response.getWriter(),
+                CsvPreference.STANDARD_PREFERENCE)) {
+            String[] header = {"kierunek", "system", "nazwaPraktyki",
+                "czasPraktyki", "opiekunUczelniany", "lp", "specializations",
+                "student", "firma", "opiekunFirmowy", "termin"};
+            csvWriter.writeHeader(header);
+            for (Wykaz aWykaz : wykazy) {
+                csvWriter.write(aWykaz, header);
+            }
+        }
+
+        //po skończeniu tej metody specjalizacje znów będą puste
+        WykazSearch nowy = (WykazSearch) modelMap.get("wykazSearch");
+        nowy.setSpecializations(null);
+        modelMap.addAttribute("wykazSearch", nowy);
     }
 
 }
